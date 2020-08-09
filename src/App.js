@@ -1,24 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Route, Redirect, Switch } from 'react-router-dom'
+import lazy from './utils/lazy'
+
+const Index = lazy(() => import('./views/Index/Index'))
+const Login = lazy(() => import('./views/Login/Login'))
+const Register = lazy(() => import('./views/Register/Register'))
+const Detail = lazy(() => import('./views/Detail/Detail'))
+const SortDetail = lazy(() => import('./views/SortDetail/SortDetail'))
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Switch>
+        <Route path='/index' component={Index}></Route>
+        <Route path='/login' component={Login}></Route>
+        <Route path='/register' component={Register}></Route>
+        <Route path='/detail' component={Detail}></Route>
+        <Route path='/sortdetail' component={SortDetail}></Route>
+        <Redirect to='/login'></Redirect>
+      </Switch>
     </div>
   );
 }

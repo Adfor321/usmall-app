@@ -1,0 +1,14 @@
+.header{
+    overflow: hidden;
+}
+.logo{
+    float: left;
+    padding-top: 0.16rem;
+}
+.am-search{
+    background-color: #fff;
+    
+}
+.am-search-input{
+    border: 0.01rem solid #ccc;
+}

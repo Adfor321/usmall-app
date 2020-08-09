@@ -1,0 +1,14 @@
+.kill{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.killImg img{
+    flex: 1;
+    width: 1.5rem;
+}
+.killImg p{
+    font-size: 0.3rem;
+    text-align: center;
+}

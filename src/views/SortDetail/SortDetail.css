@@ -1,0 +1,35 @@
+.sortdetailImg{
+    position: relative;
+    margin-bottom: 0.6rem;
+    padding-left: 0.3rem;
+}
+.sortdetailImg img{
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 0.3rem;
+}
+.buynow{
+    border: none;
+    background-color: orange;
+    color: #fff;
+    border-radius: 0.3rem;
+    width: 2rem;
+    height: 0.8rem;
+    margin-top: 0.1rem;
+    font-size: 0.3rem;
+}
+.buynow a{
+    color: #fff;
+}
+.imgRight{
+    position: absolute;
+    top: 0.2rem;
+    left: 3rem;
+    display: flex;
+    flex-direction: column;
+}
+.sortprice{
+    margin-top: 0.4rem;
+    color: red;
+}

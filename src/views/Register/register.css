@@ -1,0 +1,14 @@
+.main{
+    margin: 2.5rem auto;
+    width: 90%;
+}
+.phone{
+    margin: 0.4rem 0;
+
+}
+.password{
+    margin: 0.4rem 0;
+}
+.am-list-body::before{
+    background-color: #fff !important;
+}

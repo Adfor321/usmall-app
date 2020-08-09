@@ -1,0 +1,32 @@
+.link{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    padding-left: 0.1rem;
+    padding-bottom: 1rem;
+}
+.goods{
+    margin: 0.2rem 0;
+}
+.link img{
+    width: 2rem;
+    border-radius: 0.3rem;
+    float: left;
+}
+.buy{
+    display: flex;
+    flex-direction: column;
+    float: left;
+    margin-left: 0.2rem;
+}
+.buy button{
+    background-color: orange;
+    border: none;
+    border-radius: 0.15rem;
+    padding: 0.2rem;
+
+}
+.buy a{
+    color: #fff;
+    font-size: 0.3rem;
+}

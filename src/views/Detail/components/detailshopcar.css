@@ -1,0 +1,45 @@
+.DetailShopcar{
+    position: relative;
+    width: 100vw;
+    height: 6.5rem;
+    background-color: #fff;
+    padding-left: 0.3rem;
+}
+.shopcarback{
+    overflow: hidden;
+    padding-top: 0.3rem;
+}
+.shopcarback button{
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    border: none;
+    background-color: orange;
+    color: #fff;
+    padding: 0.3rem;
+}
+.shopcarback img{
+    width: 2.5rem;
+    margin-top: -0.2rem;
+    border-radius: 0.2rem;
+}
+.shopName{
+    float: right;
+    margin-right: 1.6rem;
+    
+}
+.specsattrBox{
+    position: absolute;
+    bottom: 1.6rem;
+}
+.shopcarback h2{
+    margin-bottom: 0.5rem;
+    margin-top: 0.3rem;
+}
+.specsattr{
+    border: 0.01rem solid;
+    margin: 0.2rem;
+    padding: 0.2rem;
+    border-radius: 0.1rem;
+}

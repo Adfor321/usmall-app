@@ -1,0 +1,48 @@
+.am-tabs-default-bar-left .am-tabs-default-bar-underline{
+    left: 0;
+    right: 5rem;
+}
+.sort{
+    position: relative;
+    height: 70vh;
+}
+.sortShow{
+    position: absolute;
+    width: 5.7rem;
+    height: 11rem;
+    right: 0;
+    top: 0.7rem;
+}
+.sortImg{
+    position: relative;
+    display: inline-block;
+    width: 2.5rem;
+    height: 2.5rem;
+    margin-left: 0.3rem;
+    margin-top: 0.1rem;
+}
+.sortImg span{
+    border-radius: 0.3rem;
+}
+.sortImg img{
+    width: 100%;
+    height: 100%;
+    border: 0.01rem solid #1D84A7;
+    border-radius: 0.3rem;
+}
+.sortImg i{
+    position: absolute;
+    font-style: normal;
+    display: inline-block;
+    width: 100%;
+    height: 0.45rem;
+    bottom: -0.01rem;
+    left: 0;
+    border: 0.02rem solid #1D84A7;
+    border-radius:0 0 0.3rem 0.3rem ;
+    background-color: #1D84A7;
+    text-align: center;
+    color: #fff;
+    font-size: 0.3rem;
+    line-height: 0.45rem;
+}
