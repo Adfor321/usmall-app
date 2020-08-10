@@ -1,12 +1,12 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from "redux-thunk"
-import { reqGoods, reqDetail, reqSort,reqSortGoods,reqShopCarList } from '../utils/requset'
+import { reqGoods, reqDetail, reqSort, reqSortGoods, reqShopCarList, reqShopEdit } from '../utils/requset'
 const initState = {
     goodsList: [],
     goodsDetail: {},
     sortList: [],
-    sortGoods:[],
-    shopcarList:[]
+    sortGoods: [],
+    shopcarList: [],
 }
 const reqGoodsAction = (arr) => {
     return { type: 'changeGoods', list: arr }
@@ -43,8 +43,8 @@ const reqSortAction = (arr) => {
 }
 //分类列表请求
 export const reqSortList = () => {
-    
-    return (dispatch,getState) => {
+
+    return (dispatch, getState) => {
         const { sortList } = getState()
         if (sortList.length > 0) {
             return
@@ -55,28 +55,64 @@ export const reqSortList = () => {
     }
 }
 //分类商品请求
-const reqSortgoodsAction = (arr)=>{
-    return {type:'changeSortGoods',list:arr}
+const reqSortgoodsAction = (arr) => {
+
+
+    return { type: 'changeSortGoods', list: arr }
 }
-export const reqSortgoods = (id)=>{
-    return (dispatch)=>{
-        reqSortGoods({fid:id}).then(res=>{
+export const reqSortgoods = (id) => {
+    return (dispatch) => {
+        reqSortGoods({ fid: id }).then(res => {
             dispatch(reqSortgoodsAction(res.data.list))
         })
     }
 }
 //购物车列表请求
-const reqShopcarAction = (arr)=>{
-    return {type:'changeShopcarList',list:arr}
+const reqShopcarAction = (arr) => {
+    return { type: 'changeShopcarList', list: arr }
 }
-export const reqShopcar = (id)=>{
-    console.log(id)
-    return (dispatch)=>{
-        reqShopCarList({uid:id}).then(res=>{
-            dispatch(reqShopcarAction(res.data.list))
+export const reqShopcar = (id) => {
+    return (dispatch) => {
+        reqShopCarList({ uid: id }).then(res => {
+            const lists = res.data.list
+            if (lists) {
+                lists.forEach(item => {
+                    item.checked = false;
+                });
+                dispatch(reqShopcarAction(lists))
+            }
+
         })
     }
 }
+//购物车修改
+export const reqShopEditAction = (arr) => {
+    return { type: 'shopcaredit', list: arr }
+}
+export const reqShopcarEdit = (id) => {
+    return (dispatch, getState) => {
+        reqShopEdit({ id: id.id, type: id.type }).then(res => {
+
+        })
+    }
+}
+//购物车选中项
+export const reqShopcarChecked = (index) => {
+    return {
+        type: 'shopcheck', index
+    }
+}
+//购物车全选
+export const reqAllchecked = (checked) => {
+    return (dispatch, getState) => {
+        let list = getState().shopcarList
+        list.forEach(item => {
+            item.checked = checked
+        });
+        dispatch(reqShopcarAction(list))
+    }
+}
+//获取之前的列表
 function reducer(state = initState, action) {
     switch (action.type) {
         case "changeGoods":
@@ -97,12 +133,37 @@ function reducer(state = initState, action) {
         case "changeSortGoods":
             return {
                 ...state,
-                sortGoods:action.list
+                sortGoods: action.list
             };
+        //购物车列表
         case "changeShopcarList":
-            return{
+            let oldList = [...state.shopcarList];
+            let list = action.list
+            if (list) {
+                list.forEach((item, index) => {
+                    if (oldList.length) {
+                        item.checked = oldList[index].checked
+                    } else {
+                        item.checked = false
+                    }
+                })
+            }
+            return {
                 ...state,
-                shopcarList:action.list
+                shopcarList: list ? list : []
+            };
+        case "shopcaredit":
+            return {
+                ...state,
+                Refresh: action.list
+            }
+            //选中
+        case "shopcheck":
+            let shopcarList = [...state.shopcarList];
+            shopcarList[action.index].checked = !shopcarList[action.index].checked
+            return {
+                ...state,
+                shopcarList
             }
         default:
             return state

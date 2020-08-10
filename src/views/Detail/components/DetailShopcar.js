@@ -44,7 +44,7 @@ export default class DetailShopcar extends Component {
                     <div className='specsattrBox'>
                         {
                             JSON.parse(msg.specsattr).map(item => {
-                                return <Tag style={{marginLeft:'0.3rem',marginTop:'0.2rem',width:'1.6rem'}} key={item} onChange={(selected) => this.selects(selected, item)}>{item}</Tag>
+                                return <Tag style={{marginLeft:'0.3rem',marginTop:'0.2rem',width:'1.6rem',height:'0.8rem'}} key={item} onChange={(selected) => this.selects(selected, item)}>{item}</Tag>
                             })
                         }
                     </div>

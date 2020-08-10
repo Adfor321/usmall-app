@@ -52,7 +52,7 @@ export default class Mine extends Component {
                     {
                         this.state.arr.map(item => {
                             return (
-                                <span className='loadBox'>
+                                <span className='loadBox' key={item}>
                                     <img src={loading} alt="" />
                                     <p style={{ fontSize: '0.3rem' }}>待发货</p>
                                     <span className='loadinglogo'><Badge text={3} overflowCount={9} /></span>
