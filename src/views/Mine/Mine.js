@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Mine.css'
+import qs from 'qs'
 import { Badge } from 'antd-mobile';
 import setImg from '../../assets/img/set.png'
 import msgImg from '../../assets/img/news.png'
@@ -16,7 +17,7 @@ export default class Mine extends Component {
     }
     componentDidMount(){
         this.setState({
-            nickname:sessionStorage.getItem('nickname')
+            nickname:qs.parse(sessionStorage.getItem('user')).nickname
         })
     }
     render() {

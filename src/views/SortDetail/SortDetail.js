@@ -20,7 +20,6 @@ import Header from '../../components/Header/Header'
         })
     }
     render() {
-        console.log(this.props.goodsDetail)
         const {goodsDetail} = this.props
         if(goodsDetail.length===0){
             return null
@@ -49,7 +48,6 @@ import Header from '../../components/Header/Header'
     }
 }
 const mapStateToProps = (state)=>{
-    console.log(state)
     return {
         goodsDetail:sortGoods(state),
     }

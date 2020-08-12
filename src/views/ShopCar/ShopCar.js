@@ -3,12 +3,14 @@ import { connect } from 'react-redux'
 import Header from '../../components/Header/Header'
 import { reqShopcar, shopcarList, reqShopcarEdit, reqShopcarChecked, reqAllchecked } from '../../store'
 import { filterPrice } from '../../filters/filter'
+//图片
 import selectImg from '../../assets/img/radio_nor.png'
 import selectImg_on from '../../assets/img/radio_hig.png'
 import editImg from '../../assets/img/editor_nor.png'
 import editImg_on from '../../assets/img/editor_hig.png'
 import store from '../../assets/img/store.png'
 import ShopCarNo from '../../assets/img/tab_shopping_nor.png'
+
 import './shopcar.css'
 import { reqShopDel } from '../../utils/requset'
 import { Modal, Toast } from 'antd-mobile';
@@ -21,11 +23,10 @@ class ShopCar extends Component {
             edit: false,
             selectArr: [],
             price: 0,
-            vas : false
         }
     }
     componentDidMount() {
-        this.props.reqShopCarList(sessionStorage.getItem("islogin"))
+        this.props.reqShopCarList()
     }
     //单选
     selects(index) {
@@ -44,9 +45,9 @@ class ShopCar extends Component {
             edit: !this.state.edit
         })
     }
-    add(type, id, index) {
-        this.props.reqShopcarEdit({ type: type, id: id, index: index })
-        this.props.reqShopCarList(sessionStorage.getItem("islogin"))
+    //加减
+    add(type, id) {
+        this.props.reqShopcarEdit({ type: type, id: id})
     }
     //合计
     allsprice() {
@@ -66,10 +67,9 @@ class ShopCar extends Component {
                 text: '确定',
                 onPress: () =>
                     reqShopDel({ id: id }).then(res => {
-                        console.log(id)
                         if (res.data.code === 200) {
                             Toast.success('删除成功', 1)
-                            this.props.reqShopCarList(sessionStorage.getItem("islogin"))
+                            this.props.reqShopCarList()
                             this.setState({
                                 edit: !this.state.edit
                             })
@@ -100,9 +100,9 @@ class ShopCar extends Component {
                             return (
                                 <li key={item.id} className='carGoodsList'>
                                     <p className="carGoodsTitle"><i><img src={store} alt="" /></i>杭州保税局仓</p>
-                                    <div className='carGoods'>
+                                    <div className={this.state.edit ?'carGoodsEdit':'carGoods'}>
                                         {
-                                            item.checked ? <span onClick={() => this.selects(index)} className={this.state.edit ? 'carGoodsEdit' : "carGoodsSelect"}><img src={selectImg_on} alt="" /></span> : <span className={this.state.edit ? 'carGoodsEdit' : "carGoodsSelect"} onClick={() => this.selects(index)}><img src={selectImg} alt="" /></span>
+                                            item.checked ? <span onClick={() => this.selects(index)} className="carGoodsSelect"><img src={selectImg_on} alt="" /></span> : <span className={this.state.edit ? 'carGoodsEdit' : "carGoodsSelect"} onClick={() => this.selects(index)}><img src={selectImg} alt="" /></span>
                                         }
                                         <span className='carGoodsImg'>
                                             <img src={item.img} alt="" />

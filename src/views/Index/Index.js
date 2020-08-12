@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Route, Redirect, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import { TabBar } from 'antd-mobile';
 import './index.css'
 //路由
@@ -17,6 +17,7 @@ import sort_on from '../../assets/img/tab_menu_hig.png'
 import sort from '../../assets/img/tab_menu_nor.png'
 import me from '../../assets/img/tab_me_nor.png'
 import me_on from '../../assets/img/tab_me_hig.png'
+import DefRoute from '../../utils/DefRoute'
 export default class Index extends Component {
     constructor(props) {
         super(props);
@@ -29,6 +30,7 @@ export default class Index extends Component {
         this.setState({
             paths:this.props.history.location.pathname
         })
+        
     }
     onView(url) {
         this.props.history.push(url)
@@ -40,13 +42,11 @@ export default class Index extends Component {
     render() {
         return (
             <div className='index'>
-
                 <Switch>
                     <Route path='/index/home' component={Home}></Route>
                     <Route path='/index/sort' component={Sort}></Route>
                     <Route path='/index/shopcar' component={ShopCar}></Route>
-                    <Route path='/index/mine' component={Mine}></Route>
-                    <Redirect to='/idnex/home'></Redirect>
+                    <DefRoute path='/index/mine' component={Mine}></DefRoute>
                 </Switch>
                 <div className='footer'>
                     <TabBar
@@ -103,7 +103,7 @@ export default class Index extends Component {
                             }}
                             data-seed="logId1"
                         >
-                            {/* {this.renderContent(<Sort/>)} */}
+                            
                         </TabBar.Item>
                         <TabBar.Item
                             icon={

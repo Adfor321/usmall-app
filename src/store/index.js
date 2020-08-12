@@ -1,6 +1,8 @@
 import { createStore, applyMiddleware } from 'redux'
 import thunk from "redux-thunk"
+import { Toast } from 'antd-mobile';
 import { reqGoods, reqDetail, reqSort, reqSortGoods, reqShopCarList, reqShopEdit } from '../utils/requset'
+import qs from 'qs'
 const initState = {
     goodsList: [],
     goodsDetail: {},
@@ -25,9 +27,9 @@ export const reqHomeList = () => {
 const reqDetailsAction = (arr) => {
     return { type: 'changeDetail', list: arr }
 }
+//详情
 export const reqDetails = (id) => {
     return (dispatch, getState) => {
-
         if (Number(id) === getState().goodsDetail.id) {
             return;
         } else {
@@ -43,7 +45,6 @@ const reqSortAction = (arr) => {
 }
 //分类列表请求
 export const reqSortList = () => {
-
     return (dispatch, getState) => {
         const { sortList } = getState()
         if (sortList.length > 0) {
@@ -56,8 +57,6 @@ export const reqSortList = () => {
 }
 //分类商品请求
 const reqSortgoodsAction = (arr) => {
-
-
     return { type: 'changeSortGoods', list: arr }
 }
 export const reqSortgoods = (id) => {
@@ -71,28 +70,34 @@ export const reqSortgoods = (id) => {
 const reqShopcarAction = (arr) => {
     return { type: 'changeShopcarList', list: arr }
 }
-export const reqShopcar = (id) => {
+export const reqShopcar = () => {
     return (dispatch) => {
-        reqShopCarList({ uid: id }).then(res => {
-            const lists = res.data.list
-            if (lists) {
-                lists.forEach(item => {
-                    item.checked = false;
-                });
-                dispatch(reqShopcarAction(lists))
+        reqShopCarList({ uid: qs.parse(sessionStorage.getItem("user")).uid }).then(res => {
+            if (res) {
+                if (res.data.msg === "登录已过期或访问权限受限"||res.data.msg === "缺少必要条件") {
+                    Toast.fail("登录已过期或访问权限受限", 1)
+                    sessionStorage.removeItem('user')
+                    window.open("http://localhost:3001/#/", "_self")
+                }
+                const lists = res.data.list?res.data.list:[]
+                if (lists) {
+                    lists.forEach(item => {
+                        item.checked = false;
+                    });
+                    dispatch(reqShopcarAction(lists))
+                }
             }
+
 
         })
     }
+
 }
 //购物车修改
-export const reqShopEditAction = (arr) => {
-    return { type: 'shopcaredit', list: arr }
-}
 export const reqShopcarEdit = (id) => {
-    return (dispatch, getState) => {
-        reqShopEdit({ id: id.id, type: id.type }).then(res => {
-
+    return (dispatch) => {
+        reqShopEdit(id).then(res => {
+            dispatch(reqShopcar())
         })
     }
 }
@@ -152,12 +157,7 @@ function reducer(state = initState, action) {
                 ...state,
                 shopcarList: list ? list : []
             };
-        case "shopcaredit":
-            return {
-                ...state,
-                Refresh: action.list
-            }
-            //选中
+        //选中
         case "shopcheck":
             let shopcarList = [...state.shopcarList];
             shopcarList[action.index].checked = !shopcarList[action.index].checked

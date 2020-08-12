@@ -94,6 +94,12 @@
     justify-content: space-around;
     align-items: center;
 }
+.carGoodsEdit{
+    display: flex;
+    margin-left: -1rem;
+    justify-content: space-around;
+    align-items: center;
+}
 .del{
     width: 1rem;
     height: 2rem;
@@ -104,10 +110,6 @@
     padding:0.2rem 0 ;
     background-color: orange;
     color: #fff;
-}
-.carGoodsEdit{
-    margin-left: -1rem;
-    margin-top: 0.3rem;
 }
 .shopCarNo{
     margin: 4rem auto;
